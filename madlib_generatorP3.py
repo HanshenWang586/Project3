@@ -1,5 +1,6 @@
 # code developed by Jackie Cohen; revised by Paul Resnick
 # further revised by Colleen van Lent for Python3
+# By Hanshen Wang
 import nltk # requires some downloading/installing dependencies to use all its features; numpy is especially tricky to install
 import random
 
