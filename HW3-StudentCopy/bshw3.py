@@ -13,7 +13,12 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-# Task 1
+
 url = "https://www.si.umich.edu/programs/bachelor-science-information/bsi-admissions"
 html = urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
+
+
+contents = soup.find_all("student")
+for line in soup.find("student"):
+	print(line)
