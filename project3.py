@@ -1,8 +1,8 @@
 # Part1
-from nltk.book import *
-from nltk import bigrams
-import nltk # requires some downloading/installing dependencies to use all its features; numpy is especially tricky to install
+import nltk 
 import random
+from nltk.book import text2
+# requires some downloading/installing dependencies to use all its features; numpy is especially tricky to install
 
 # import nltk
 nltk.download('punkt')
@@ -12,7 +12,7 @@ from nltk import word_tokenize,sent_tokenize
 debug = False #True
 
 # get file from user to make mad lib out of
-if debug:
+# if debug:
 	# print ("Getting information from file madlib_test.txt...\n")
 fname = "madlibtest2.txt" # need a file with this name in directory
 
