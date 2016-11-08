@@ -18,7 +18,4 @@ url = "https://www.si.umich.edu/programs/bachelor-science-information/bsi-admiss
 html = urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
 
-
-contents = soup.find_all("student")
-for line in soup.find("student"):
-	print(line)
+print(soup.body.findAll(text='student'))

@@ -1,7 +1,8 @@
 # code developed by Jackie Cohen; revised by Paul Resnick
 # further revised by Colleen van Lent for Python3
-# By Hanshen Wang
-import nltk # requires some downloading/installing dependencies to use all its features; numpy is especially tricky to install
+# furthered By Hanshen Wang for project 3
+import nltk 
+# requires some downloading/installing dependencies to use all its features; numpy is especially tricky to install
 import random
 
 # import nltk
@@ -14,7 +15,7 @@ debug = False #True
 # get file from user to make mad lib out of
 if debug:
 	print ("Getting information from file madlib_test.txt...\n")
-fname = "madlibtest2.txt" # need a file with this name in directory
+fname = "a.txt" # need a file with this name in directory
 
 f = open(fname, 'r')
 para = f.read()
