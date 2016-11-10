@@ -19,6 +19,7 @@ url = "https://www.si.umich.edu/programs/bachelor-science-information/bsi-admiss
 html = urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
 text = soup.prettify()
-text.replace("student", "AMAZING student");
+text = text.replace("student", "AMAZING student");
 print (text)
+
 
