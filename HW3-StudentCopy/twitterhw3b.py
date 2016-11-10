@@ -7,6 +7,9 @@
 
 # Be prepared to change the search term during demo.
 
+#SI206 Project3 (NLTK) Part4, Dr. Van Lent
+# By Hanshen Wang, Nov 10
+
 import tweepy
 from textblob import TextBlob
 

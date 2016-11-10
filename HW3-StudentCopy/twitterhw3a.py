@@ -3,6 +3,10 @@
 # hashtags #UMSI-206 #Proj3 in the tweet.
 
 # You will demo this live for grading.
+
+#SI206 Project3 (NLTK) Part3, Dr. Van Lent
+# By Hanshen Wang, Nov 10
+
 from TwitterAPI import TwitterAPI
 import tweepy
 

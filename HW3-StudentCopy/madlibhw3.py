@@ -9,6 +9,9 @@
 # Deliverables:
 # 1) Print the orginal text (150 tokens)
 # 1) Print the new text
+
+#SI206 Project3 (NLTK) Part2, Dr. Van Lent
+# By Hanshen Wang, Nov 10
 print("START*******")
 
 import nltk

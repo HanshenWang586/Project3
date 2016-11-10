@@ -10,7 +10,8 @@
 
 # Deliverables
 # Make sure the new page is uploaded to your GitHub account.
-import re
+#SI206 Project3 (NLTK) Part1, Dr. Van Lent
+# By Hanshen Wang, Nov 10
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
@@ -26,5 +27,3 @@ f = open('index.html','w')
 f.write(text)
 f.close()
 print (text)
-
-
