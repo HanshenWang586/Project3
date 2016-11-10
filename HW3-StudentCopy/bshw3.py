@@ -14,13 +14,17 @@ import re
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-
 url = "https://www.si.umich.edu/programs/bachelor-science-information/bsi-admissions"
 html = urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
 text = soup.prettify()
 text = text.replace("student", "AMAZING student");
-text = text.repalce('<iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/mimp_3gquc4?feature=oembed" width="560"></iframe>','<img src="HW3-StudentCopy/1.jpg">')
+text = text.replace('/sites/default/themes/umsi/imgs/logo.png','media/logo.png')
+text = text.replace('/sites/default/themes/umsi/imgs/logo_footer.png','media/logo.png')
+text = text.replace('https://www.youtube.com/embed/mimp_3gquc4?feature=oembed','media/1.jpg')
+f = open('index.html','w')
+f.write(text)
+f.close()
 print (text)
 
 
