@@ -4,26 +4,17 @@
 
 # You will demo this live for grading.
 from TwitterAPI import TwitterAPI
+import tweepy
 
 
-access_token_key = "2473973030-dT9wJ0O4EedtLjdwr17JmDlsriHZVFK9rKofDs7"
-access_token_secret = "XYfbm1JgHP4MG0yW7H4NmDKHuGjJ6M3R7iiaXICIasWIW"
-consumer_key = "4S5UioS8r18Dg9q5KeFjRWssx"
-consumer_secret = "	IaqTNMBtYWC9UUijpgnBX3DJoA1JlCZFckVEIysonM3hDCsfel"
+access_token = "2473973030-PJ1R1wixU6OThS8sKZVPkXHK4v6o5KfndcFDsrj"
+access_token_secret = "DM6VNbxN4XtvWPWWRJxVuHKsXLIvBirixSufWyz8OXbUE"
+consumer_key = "ZPVnQkA3plpVnX8FtRrYvMem7"
+consumer_secret = "xFkUw83rUbYWrT2Og6s68f5orOc0JcnpTDbRc6DGi9urbjbZVf"
 
-api = TwitterAPI(consumer_key,
-                 consumer_secret,
-                 access_token_key,
-                 access_token_secret)
+auth = tweepy.OAuthHandler(consumer_key,consumer_secret)
+auth.set_access_token(access_token,access_token_secret)
 
-# STEP 1 - upload image
-file = open('pic.jpg', 'rb')
-data = file.read()
-r = api.request('media/upload', None, {'media': data})
-print('UPLOAD MEDIA SUCCESS' if r.status_code == 200 else 'UPLOAD MEDIA FAILURE1')
+api = tweepy.API(auth)
 
-# STEP 2 - post tweet with reference to uploaded image
-if r.status_code == 200:
-        media_id = r.json()['media_id']
-        r = api.request('statuses/update', {'status':'I found pizza!', 'media_ids':media_id})
-        print('UPDATE STATUS SUCCESS' if r.status_code == 200 else 'UPDATE STATUS FAILURE2')
+api.update_with_media("pic.jpg")
