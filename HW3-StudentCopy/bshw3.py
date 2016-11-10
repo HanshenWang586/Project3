@@ -20,6 +20,7 @@ html = urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
 text = soup.prettify()
 text = text.replace("student", "AMAZING student");
+text = text.repalce('<iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/mimp_3gquc4?feature=oembed" width="560"></iframe>','<img src="HW3-StudentCopy/1.jpg">')
 print (text)
 
 
