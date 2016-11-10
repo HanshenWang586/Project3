@@ -19,10 +19,7 @@ print(len(text2))
 # print(sorted(set(text2))[:151])
 tokens = text2[:151]
 tagged_tokens = nltk.pos_tag(tokens)
-print("TOKENS")
-print(tokens)
-print("TAGGED TOKENS")
-print(tagged_tokens)
+
 for tup in tagged_tokens[:5]:
 	print (tup)
 

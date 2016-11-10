@@ -10,6 +10,7 @@
 
 # Deliverables
 # Make sure the new page is uploaded to your GitHub account.
+import re
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
@@ -17,5 +18,7 @@ from bs4 import BeautifulSoup
 url = "https://www.si.umich.edu/programs/bachelor-science-information/bsi-admissions"
 html = urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
+text = soup.prettify()
+text.replace("student", "AMAZING student");
+print (text)
 
-print(soup.body.findAll(text='student'))
