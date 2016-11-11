@@ -23,9 +23,6 @@ print(len(text2))
 tokens = text2[:151]
 tagged_tokens = nltk.pos_tag(tokens)
 
-for tup in tagged_tokens[:5]:
-	print (tup)
-
 tagmap = {"NN":"a noun","NNS":"a plural noun","VB":"a verb","JJ":"an adjective"}
 substitution_probabilities = {"NN":.15,"NNS":.1,"VB":.1,"JJ":.1}
 
