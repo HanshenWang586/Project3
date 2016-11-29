@@ -28,7 +28,7 @@ api = tweepy.API(auth)
 count = 0
 sumSubj = 0
 sumPloar = 0
-tweets = api.search("Trump")
+tweets = api.search("Hillary")
 for tweet in tweets:
 	print(tweet.text)
 	analysis = TextBlob(tweet.text)
