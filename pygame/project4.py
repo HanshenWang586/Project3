@@ -1,20 +1,14 @@
 # Project4
 # By Hanshen Wang, 11/18/2016
 
-import pygame, sys
-from pygame.locals import *
-import random
-import os
+import pygame, random
 from pygame.locals import Rect, DOUBLEBUF, QUIT, K_ESCAPE, KEYDOWN, K_DOWN, \
-    K_LEFT, K_UP, K_RIGHT, KEYUP, K_LCTRL, K_RETURN, FULLSCREEN
+    K_d, K_UP, K_s, KEYUP, K_a, FULLSCREEN
 
 pygame.init()
 
-XMax = 900
-YMax = 600
-crashed = False
-
-
+screen = pygame.display.set_mode((640, 480))
+myfont = pygame.font.SysFont("monospace", 15)
 brown=(190,128,0)
 black=(0,0,0)
 green=(0,128,10)
@@ -27,122 +21,126 @@ maize = (204,204,102)
 pink = (255,102,204)
 yellow=(255,255,0)
 
-
-# pygame.mixer.init()
-# pygame.mixer.music.load(os.path.join("data","music.ogg"))
-
-c1PosX = 500
-c2PosX = 450
-c3PosX = 400 
-c1PosY = 0
-c2PosY = 0
-c3PosY = 0 
-everything = pygame.sprite.Group()
-
-
-class Drum1(pygame.sprite.Sprite):
-	def __init__(self, c1Posx, c1PosY):
-		super(Drum1, self).__init__()
-		self.image = pygame.Surface((2, 2))
+class Circle1(pygame.sprite.Sprite):
+	def __init__(self):
+		pygame.sprite.Sprite.__init__(self)
+		self.image = pygame.Surface((50, 50))
+		self.image.fill(0)
+		pygame.draw.circle(self.image, maize, (25, 25), 25, 0)
 		self.rect = self.image.get_rect()
-		pygame.draw.circle(self.image, lightred,(0,0),30)
-		self.rect.center = (c1Posx, c1PosY)
-		self.velocity = 1
-		self.size = 1
-		self.colour = lightred
-
-	def accelerate(self):
-		self.image = pygame.Surface((1, self.size))
-		self.velocity += 1
+		self.velocity = 0
 
 	def update(self):
-
-		c1Posx, c1PosY = self.rect.center
-		c1PosX += self.velocity
-		c1PosY -= int(self.velocity * 3)
-		self.rect.center = c1Posx, c1PosY
-		if c1PosY <= 0:
+		x = 150
+		y = 0 + self.velocity
+		self.velocity += 5
+		self.rect.center = (x,y)
+		if(y>480):
 			self.kill()
 
+	def hit(self):
+		x,y = self.rect.center
+		if(y > 370 & y < 450):
+			self.kill()
+			label = myfont.render("Nice job!", 1, (255,255,0))
+			screen.blit(label, (100, 100))
 
 
 
-while pygame.mixer.music.get_busy():
-	time.Clock.tick(10)
+class Circle2(pygame.sprite.Sprite):
+	def __init__(self):
+		pygame.sprite.Sprite.__init__(self)
+		self.image = pygame.Surface((50, 50))
+		self.image.fill(0)
+		pygame.draw.circle(self.image, blue, (25, 25), 25, 0)
+		self.rect = self.image.get_rect()
+		self.velocity = 0
 
+	def update(self):
+		x = 320
+		y = 0 + self.velocity
+		self.velocity += 5
+		self.rect.center = (x,y)
+		if(y>480):
+		  self.kill()
+
+	def hit(self):
+		x,y = self.rect.center
+		if(y > 370 & y < 450):
+			self.kill()
+			label = myfont.render("Nice job!", 1, blue)
+			screen.blit(label, (280, 100))
+
+class Circle3(pygame.sprite.Sprite):
+	def __init__(self):
+		pygame.sprite.Sprite.__init__(self)
+		self.image = pygame.Surface((50, 50))
+		self.image.fill(0)
+		pygame.draw.circle(self.image, lightred, (25, 25), 25, 0)
+		self.rect = self.image.get_rect()
+		self.velocity = 0
+
+	def update(self):
+		x = 490
+		y = 0 + self.velocity
+		self.velocity += 5
+		self.rect.center = (x,y)
+		if(y>480):
+			self.kill()
+
+	def hit(self):
+		x,y = self.rect.center
+		if(y > 370 & y < 450):
+			self.kill()
+			label = myfont.render("Nice job!", 1, red)
+			screen.blit(label, (430, 100))
 
 def main():
+	pygame.display.set_caption("move the circle with the mouse")
 
-	c1PosX = 500
-	c2PosX = 450
-	c3PosX = 400 
-	c1PosY = 0
-	c2PosY = 0
-	c3PosY = 0 
+	background = pygame.Surface(screen.get_size())
+	background.fill(0)
+	screen.blit(background, (0, 0))
 
-	windowSurface = pygame.display.set_mode((XMax, YMax))
-	pygame.display.set_caption('game')
+	circle1 = Circle1()
+	circle2 = Circle2()
+	circle3 = Circle3()
+	allSprites = pygame.sprite.Group(circle1,circle2,circle3)
+
+	#hide mouse
+	pygame.mouse.set_visible(True)
 	clock = pygame.time.Clock()
-	empty = pygame.Surface((XMax, YMax))
-	clock = pygame.time.Clock()
-	drums = Drum1(100,100)
-	crashed = False
-	while (not crashed):
-		windowSurface.fill(black)                              
-		pygame.draw.line(windowSurface, maize, (150, 800),(400,0),5)
-		pygame.draw.line(windowSurface, blue, (450, 800),(450,0),5)
-		pygame.draw.line(windowSurface, pink, (750, 800),(500,0),5)
-		pygame.draw.line(windowSurface, red, (0, 520),(900,520),3)
-		pygame.draw.line(windowSurface, green, (0, 500),(900,500),3)
-		drums.update()
-		drums.accelerate()
-		
-		# c2 = pygame.draw.circle(windowSurface, mark,(c2PosX,c2PosY),30)
-		# c3 = pygame.draw.circle(windowSurface, yellow,(c3PosX,c3PosY),30)
-		# speed+= 0.01
-		# c1PosX += int(velocity)
-		# c2PosX += speed
-		# c3PosX -= int(speed)
+	keepGoing = True
+	while keepGoing:
 
-		# c1PosY += int(veloctiy * 3)
-		# c2PosY += int(speed * 3)
-		# c3PosY += int(speed * 3)
-		# i -= 1
-		pygame.display.update()
-
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				crashed = True
-		if(c1PosY>520):
-			c1PosX = 500
-			c1PosY = 0
-			continue
-
-	pygame.time.wait(1000)
-
-	while (True):
 		clock.tick(30)
-		screen = pygame.display.set_mode((XMax, YMax), DOUBLEBUF)
-		windowSurface.fill(black)   
-		everything.clear(screen, empty)
-		everything.update()
-		everything.draw(screen)
-		pygame.display.flip()                           
-		# c2 = pygame.draw.circle(windowSurface, mark,(c2PosX,c2PosY),30)
-		# # speed+= 0.01
-
-		# c2PosY += int(speed * 3)
-		# # i -= 1
-		# pygame.display.update()
-
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				crashed = True
-		if(c2PosY>520):
-			c2PosX = 500
-			c2PosY = 0
-			continue
-	
-if __name__ == '__main__':
-	main()
+				keepGoing = False
+		if keepGoing:
+			if event.type == KEYDOWN:
+				if event.key == K_a:
+					circle1.hit()
+			if event.type == KEYDOWN:
+				if event.key == K_s:
+					circle2.hit()
+			if event.type == KEYDOWN:
+				if event.key == K_d:
+					circle3.hit()		
 
+		pygame.draw.line(screen, maize, (150, 480),(150,0),5)
+		pygame.draw.line(screen, blue, (320, 480),(320,0),5)
+		pygame.draw.line(screen, pink, (490, 480),(490,0),5)
+		pygame.draw.line(screen, red, (0,450),(640,450),3)
+		pygame.draw.line(screen, green, (0, 370),(640,370),3)
+		allSprites.clear(screen, background)
+		allSprites.update()
+		allSprites.draw(screen)
+		
+		pygame.display.flip()
+		
+  #return mouse
+	pygame.mouse.set_visible(True)
+  
+if __name__ == "__main__":
+	main()
