@@ -4,6 +4,7 @@
 import pygame, random
 import sys
 import pygame.time
+from time import sleep
 from pygame.locals import Rect, DOUBLEBUF, QUIT, K_ESCAPE, KEYDOWN, K_DOWN, \
 	K_d, K_UP, K_s, KEYUP, K_a, FULLSCREEN
 
@@ -135,7 +136,8 @@ def main():
 
 	while True:		
 		clock.tick(30)
-		label = myfont.render("TIME:"+ str(int(pygame.time.get_ticks()/1000)) + 
+		screen.fill(black)
+		label = myfont.render("Time:"+ str(int(pygame.time.get_ticks()/1000)) + 
 			"seconds", 1, red)
 		screen.blit(label, (320, 240))
 		empty = pygame.Surface((640,480))
@@ -153,17 +155,15 @@ def main():
 			if event.type == KEYDOWN:
 				if event.key == K_d:
 					circle3.hit()		
+		
 		if circle1.rect.center[1]>450 or circle2.rect.center[1]>450 or circle3.rect.center[1]>450:
 			circle1.speed=30
 			circle2.speed=30
 			circle3.speed=30			
-			score = int(pygame.time.Clock.get_time/1000)
-			label = font2.render("GAME OEVER! Your Record:" , 1, red)
+			score = int(pygame.time.get_ticks()/1000)
+			label = font2.render("GAME OEVER! Your Record:" + str(score) , 1, red)
 			screen.blit(label, (100, 100))
-			if credits_timer:
-				credits_timer -= 1
-			else:
-				sys.exit()
+			keepGoing = False
 		
 		pygame.draw.line(screen, maize, (150, 480),(150,0),5)
 		pygame.draw.line(screen, blue, (320, 480),(320,0),5)
@@ -175,7 +175,9 @@ def main():
 		allSprites.draw(screen)
 
 		pygame.display.flip()
-	
+		if not keepGoing:	
+			sleep(5)
+			sys.exit()		
 		
   #return mouse
 	pygame.mouse.set_visible(True)
